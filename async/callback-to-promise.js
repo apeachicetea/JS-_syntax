@@ -36,24 +36,20 @@ const userStorage = new UserStorage();
 const id = prompt('enter your id');
 const password = prompt('enter your password');
 
-userStorage.loginUser(id, password)
-  .then(userStorage.getRoles)
-  .then(user => {
+// userStorage.loginUser(id, password)
+//   .then(userStorage.getRoles)
+//   .then(user => {
+//     alert(`Hello ${user.name}, you have a ${user.role} role`)
+//   })
+//   .catch(console.log);
+
+async function checkUser() {
+  try {
+    const userId = await userStorage.loginUser(id, password);
+    const user = await userStorage.getRoles(userId);
     alert(`Hello ${user.name}, you have a ${user.role} role`)
-  })
-  .catch(console.log);
-
-
-// userStorage.loginUser(
-//   id, 
-//   password, 
-//   (user) => {
-//     userStorage.getRoles(
-//       user,
-//       userWithRole => {},
-//     )
-//   }, 
-//   (error) => {
-//     console.log(error);
-//   }
-// )
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
